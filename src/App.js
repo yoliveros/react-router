@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { Route } from "react-router-dom"
+import Loadable from 'react-loadable'
+import './App.css'
 
+const loader = x => Loadable({
+	loading: () => 'Cargando...',
+	loader: x
+})
+
+const Prueba = loader(() => import('./Components/prueba'))
+const Invoices = loader(() => import('./Components/invoices'))
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Route exact path='/' component={Prueba} />
+			<Route exact path='/invoices' component={Invoices} />
+		</div>
+	)
 }
 
-export default App;
+export default App
